@@ -1,0 +1,7 @@
+#!/bin/bash
+if sudo iptables-save |grep -q $1
+then
+echo "Have log port:"$1
+else
+sudo iptables -I OUTPUT  -p tcp --sport $1
+fi
