@@ -1,4 +1,4 @@
 #!/bin/bash
 ss-server -u -c $1 --no-delay >/dev/null 2>&1 &
 port=`cat $1|grep "server_port"|grep -Eo "[0-9]+"`
-logport $port
+log_port $port
