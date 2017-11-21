@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#$1 = filename prefix. Format is ss_$1.json.It's also password
+#$2 = port . a numble of listening
+#$3 = method. Encrypted Method
+if [ $# != 3 ] ; then
+echo -e "\n USAGE: $0 filename_prefix port method\n"
+exit 1;
+fi
+
+file=ss_$1.json
+if [ -f $file ];
+then
+    rm $file
+fi
+
+echo "{" >> $file
+echo "    \"server\":\"0.0.0.0\"," >>$file
+echo "    \"server_port\":"$2"," >>$file
+echo "    \"password\":\""$1"\"," >>$file
+echo "    \"method\":\""$3"\"," >>$file
+echo "    \"timeout\":3600," >>$file
+echo "    \"fast_open\":true," >>$file
+echo "    \"mode\":\"tcp_and_udp\"," >>$file
+echo "    \"no_delay\":true," >>$file
+echo "}" >>$file
+
+log_port $2
