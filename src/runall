@@ -1,0 +1,15 @@
+#!/bin/bash
+#sudo killall ss-server
+if test -z "$1"
+	sslist_path=`pwd`
+else
+	sslist_path=$1
+fi
+for file in `ls $sslist_path/*.json`
+do
+	#  	cat $file
+	runss $file
+    port=`cat $file|grep "server_port"|grep -Eo "[0-9]+"`
+ 	log_port $port
+#   ss-server -u -c $file  >/dev/null 2>&1 &
+done
