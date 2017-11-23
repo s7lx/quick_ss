@@ -1,0 +1,6 @@
+#!/bin/bash
+sudo iptables-save > /dev/shm/sstmp.txt
+sudo iptables-save |grep -v "A OUTPUT -p tcp -m tcp --sport"|sudo iptables-restore
+sudo iptables-restore < /dev/shm/sstmp.txt
+sudo rm /dev/shm/sstmp.txt
+sudo iptables -n -v -L -t filter |grep spt|awk '{print $10,$2}'
