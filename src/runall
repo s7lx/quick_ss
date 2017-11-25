@@ -1,6 +1,7 @@
 #!/bin/bash
 #sudo killall ss-server
 if test -z "$1"
+then 
 	sslist_path=`pwd`
 else
 	sslist_path=$1
