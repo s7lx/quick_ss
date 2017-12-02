@@ -25,7 +25,7 @@ sudo make install
 
 cd /var/setup_ss/
 git clone https://github.com/s7lx/quick_ss.git
-chmod 777 -R quick_ss
+chmod 777 quick_ss -R
 cd quick_ss
 ./install_tools.sh
 
