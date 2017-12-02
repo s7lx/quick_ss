@@ -2,7 +2,7 @@
 
 sudo apt-get update && sudo apt-get install -y language-pack-zh-hans zsh git mosh --no-install-recommends
 
-#wget https://raw.githubusercontent.com/s7lx/quick_ss/master/quick_ss.sh && quick_ss.sh
+#wget https://raw.githubusercontent.com/s7lx/quick_ss/master/quick_ss.sh && chmod +x quick_ss.sh && ./quick_ss.sh
 mkdir -p /var/setup_ss/
 cd /var/setup_ss/
 wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.9/linux-headers-4.9.9-040909_4.9.9-040909.201702090333_all.deb
