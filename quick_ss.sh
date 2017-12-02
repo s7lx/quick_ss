@@ -2,6 +2,7 @@
 
 sudo apt-get update && sudo apt-get install -y language-pack-zh-hans zsh git mosh --no-install-recommends
 
+#wget https://raw.githubusercontent.com/s7lx/quick_ss/master/quick_ss.sh && quick_ss.sh
 mkdir -p /var/setup_ss/
 cd /var/setup_ss/
 wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.9/linux-headers-4.9.9-040909_4.9.9-040909.201702090333_all.deb
@@ -21,6 +22,12 @@ git submodule update --init --recursive
 ./autogen.sh
 ./configure && make
 sudo make install
+
+cd /var/setup_ss/
+git clone https://github.com/s7lx/quick_ss.git
+chmod 777 -R quick_ss
+cd quick_ss
+./install_tools.sh
 
 echo "net.ipv4.tcp_fastopen = 3" >>/etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >>/etc/sysctl.conf
