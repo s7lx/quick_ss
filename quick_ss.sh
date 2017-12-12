@@ -5,9 +5,9 @@ sudo apt-get update && sudo apt-get install -y language-pack-zh-hans zsh git mos
 #wget https://raw.githubusercontent.com/s7lx/quick_ss/master/quick_ss.sh && chmod +x quick_ss.sh && ./quick_ss.sh
 mkdir -p /var/setup_ss/
 cd /var/setup_ss/
-wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.9/linux-headers-4.9.9-040909_4.9.9-040909.201702090333_all.deb
-wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.9/linux-headers-4.9.9-040909-generic_4.9.9-040909.201702090333_amd64.deb
-wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.9.9/linux-image-4.9.9-040909-generic_4.9.9-040909.201702090333_amd64.deb
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.5/linux-headers-4.14.5-041405_4.14.5-041405.201712101332_all.deb
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.5/linux-headers-4.14.5-041405-generic_4.14.5-041405.201712101332_amd64.deb
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.14.5/linux-image-4.14.5-041405-generic_4.14.5-041405.201712101332_amd64.deb
 sudo dpkg -i linux*.deb
 
 cd /var/setup_ss/
@@ -31,6 +31,8 @@ cd quick_ss
 
 echo "net.ipv4.tcp_fastopen = 3" >>/etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >>/etc/sysctl.conf
+echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+sysctl -p
 curl -sSL http://update.aegis.aliyun.com/download/quartz_uninstall.sh | sudo bash
 rm -rf /usr/local/aegis
 rm /usr/sbin/aliyun-service
@@ -40,7 +42,7 @@ echo "Richard ALL=(ALL:ALL) ALL" >> /etc/sudoers
 echo "Richard ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 sudo adduser Richard --force-badname
-sudo mkdir -p /home/Richard/.ssh/
+#sudo mkdir -p /home/Richard/.ssh/
 #sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 #git submodule update --init --recursive
