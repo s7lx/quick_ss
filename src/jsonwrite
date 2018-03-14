@@ -19,7 +19,7 @@ echo "    \"server\":\"0.0.0.0\"," >>$file
 echo "    \"server_port\":"$2"," >>$file
 echo "    \"password\":\""$1"\"," >>$file
 echo "    \"method\":\""$3"\"," >>$file
-echo "    \"timeout\":3600," >>$file
+echo "    \"timeout\":120," >>$file
 echo "    \"fast_open\":true," >>$file
 echo "    \"mode\":\"tcp_and_udp\"," >>$file
 echo "    \"no_delay\":true," >>$file
