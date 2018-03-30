@@ -13,16 +13,9 @@ if [ -f $file ];
 then
     rm $file
 fi
+port=$2
+mtd=$3
+pswd=$1
 
-echo "{" >> $file
-echo "    \"server\":\"0.0.0.0\"," >>$file
-echo "    \"server_port\":"$2"," >>$file
-echo "    \"password\":\""$1"\"," >>$file
-echo "    \"method\":\""$3"\"," >>$file
-echo "    \"timeout\":120," >>$file
-echo "    \"fast_open\":true," >>$file
-echo "    \"mode\":\"tcp_and_udp\"," >>$file
-echo "    \"no_delay\":true," >>$file
-echo "}" >>$file
-
+eval echo -e  `cat /etc/ss_tpl.tpl` >>$file
 log_port $2
