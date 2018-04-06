@@ -10,7 +10,7 @@ for file in `ls $sslist_path/*.json`
 do
 	#  	cat $file
     port=`cat $file|grep "server_port"|grep -Eo "[0-9]+"`
-    if [ "$port" -gt 1024]
+    if [ "$port" -gt 1024 ]
     then runss $file
     else sudo runss $file
     fi
