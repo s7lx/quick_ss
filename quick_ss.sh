@@ -36,7 +36,7 @@ install_ss-libev_official()
 	sudo apt-get install software-properties-common -y
 	sudo add-apt-repository ppa:max-c-lv/shadowsocks-libev -y
 	sudo apt-get update
-	sudo apt-get install shadowsocks-libev
+	sudo apt-get install -y shadowsocks-libev
 }
 
 install_simple-obfs()
@@ -48,6 +48,14 @@ install_simple-obfs()
 	./autogen.sh
 	./configure && make
 	sudo make install
+	popd
+}
+install_libcork_binary()
+{
+	pushd /var/setup_ss/
+	fn=`curl http://jp.gzlong7.tk |egrep -o "libcork.*?deb[^<]" |egrep -o "libcork.*?deb"`
+	wget "http://jp.gzlong7.tk/$fn"
+	sudo dpkg -i simple*.deb
 	popd
 }
 install_simple-obfs_binary()
@@ -107,6 +115,7 @@ main()
 	install_base
 	update_kernel
 	#install_ss-libev
+	install_libcork_binary
 	install_ss-libev_official
 	#install_simple-obfs
 	install_simple-obfs_binary
