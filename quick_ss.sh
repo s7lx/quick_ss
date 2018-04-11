@@ -22,7 +22,7 @@ update_kernel()
 }
 
 
-install_ss-libev()
+install_ss-libev_frsrc()
 {
 	pushd /var/setup_ss/
 	wget --no-check-certificate https://raw.githubusercontent.com/s7lx/shadowsocks_install/master/shadowsocks-libev-debian.sh
@@ -31,7 +31,7 @@ install_ss-libev()
 	popd
 }
 
-install_ss-libev_official()
+install_ss-libev()
 {
 	sudo apt-get install software-properties-common -y
 	sudo add-apt-repository ppa:max-c-lv/shadowsocks-libev -y
@@ -39,7 +39,7 @@ install_ss-libev_official()
 	sudo apt-get install -y shadowsocks-libev
 }
 
-install_simple-obfs()
+install_simple-obfs_frsrc()
 {
 	pushd /var/setup_ss/
 	git clone https://github.com/shadowsocks/simple-obfs.git
@@ -50,15 +50,15 @@ install_simple-obfs()
 	sudo make install
 	popd
 }
-install_libcork_binary()
+install_libcork()
 {
 	pushd /var/setup_ss/
 	fn=`curl http://jp.gzlong7.tk |egrep -o "libcork.*?deb[^<]" |egrep -o "libcork.*?deb"`
 	wget "http://jp.gzlong7.tk/$fn"
-	sudo dpkg -i simple*.deb
+	sudo dpkg -i libcork*.deb
 	popd
 }
-install_simple-obfs_binary()
+install_simple-obfs()
 {
 	pushd /var/setup_ss/
 	fn=`curl http://jp.gzlong7.tk |egrep -o "simple.*?deb[^<]" |egrep -o "simple.*?deb"`
@@ -96,32 +96,39 @@ remove_yundun()
 
 add_usr()
 {
-	echo "Richard ALL=(ALL:ALL) ALL" >> /etc/sudoers
-	echo "Richard ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 	sudo adduser Richard --force-badname
 }
 
 config_usr()
 {
-	sudo mkdir -p /home/Richard/.ssh/
 	wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O /home/Richard/install_omz.sh
 	chmod +x /home/Richard/install_omz.sh
+
+	sudo mkdir -p /home/Richard/.ssh/
 	pbkey="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQD3dPdfebgbUPrGNZo4UMmnFaqzswZvbc7Trvua4ycdeu1kBBM/ZXfwI+Hgz2xI0fCfvVJh1pRTlOP5pVh6vuI96wNblVWtL7ZwlKABCbw3JwQ9rCLzAL11jQpB6V3jmzBDGEShBltQLy4IFnz8FvRcH4n68upSCeqrtutCscrzUw== Richard@RicharddeMBP.lan" 
 	echo $pbkey >> /home/Richard/.ssh/authorized_keys
+
+	echo "Richard ALL=(ALL:ALL) ALL" >> /etc/sudoers
+	echo "Richard ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 }
 main()
 {
 	init_base
 	install_base
-	update_kernel
-	#install_ss-libev
-	install_libcork_binary
-	install_ss-libev_official
-	#install_simple-obfs
-	install_simple-obfs_binary
+
+	install_libcork
+	#install_ss-libev_frsrc
+	install_ss-libev
+	#install_simple-obfs_frsrc
+	install_simple-obfs
+
 	install_quick-ss
-	config_sysctl
+
 	remove_yundun
+
+	update_kernel
+	config_sysctl
+
 	add_usr
 	#config_usr
 }
