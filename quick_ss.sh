@@ -115,14 +115,13 @@ main()
 {
 	init_base
 	install_base
+	install_quick-ss
 
 	install_libcork
 	#install_ss-libev_frsrc
 	install_ss-libev
 	#install_simple-obfs_frsrc
 	install_simple-obfs
-
-	install_quick-ss
 
 	remove_yundun
 

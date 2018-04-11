@@ -26,9 +26,8 @@ if len(sys.argv) == 3 :
     f=read_file(sys.argv[2])
 else :
     try:
-        f =sys.stdin.readline()
+        f =sys.stdin.read()
     except KeyboardInterrupt:
-        #f=sys.stdin.readline()
-        f=""
+        exit(1)
 if len(f) !=0:
     controller(sys.argv[1],f)
