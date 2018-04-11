@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get update && sudo apt-get install -y language-pack-zh-hans zsh git mosh --no-install-recommends
+sudo apt-get update && sudo apt-get install -y language-pack-zh-hans zsh git mosh libsodium18 libmbedcrypto0 --no-install-recommends
 
 #wget https://raw.githubusercontent.com/s7lx/quick_ss/master/quick_ss.sh && chmod +x quick_ss.sh && ./quick_ss.sh
 mkdir -p /var/setup_ss/
