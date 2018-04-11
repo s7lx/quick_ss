@@ -11,10 +11,10 @@ def read_file(fn):
     return h
 
 def controller(reg_str,ctstr):
-    ''' argv[1]  is  regx fomula
-        argv[2]  is  file name
+    ''' regx fomula
+        content string
          '''
-    ct = re.compile(sys.argv[1],re.DOTALL).findall(ctstr)
+    ct = re.compile(reg_str,re.DOTALL).findall(ctstr)
     for x in ct :
         print x;
 
