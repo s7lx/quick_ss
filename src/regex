@@ -1,0 +1,34 @@
+#!/usr/bin/python
+#coding: utf8
+import re
+import sys
+
+def read_file(fn):
+    '''read file '''
+    fp = open(fn,"r")
+    h = fp.read()
+    fp.close
+    return h
+
+def controller(reg_str,ctstr):
+    ''' argv[1]  is  regx fomula
+        argv[2]  is  file name
+         '''
+    ct = re.compile(sys.argv[1],re.DOTALL).findall(ctstr)
+    for x in ct :
+        print x;
+
+    return
+
+if len(sys.argv) < 2 :
+    exit()
+if len(sys.argv) == 3 :
+    f=read_file(sys.argv[2])
+else :
+    try:
+        f =sys.stdin.readline()
+    except KeyboardInterrupt:
+        #f=sys.stdin.readline()
+        f=""
+if len(f) !=0:
+    controller(sys.argv[1],f)

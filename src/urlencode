@@ -1,0 +1,17 @@
+#!/usr/bin/python
+#coding: utf8
+import sys, urllib as ul;
+def read_file(fn):
+    fp = open(fn,"r")
+    h = fp.read()
+    fp.close
+    return h
+if len(sys.argv) == 2 :
+    p=read_file(sys.argv[1])
+if len(sys.argv) == 1 :
+    try:
+        p = sys.stdin.readline()
+    except KeyboardInterrupt:
+        p=""
+if len(p) !=0:
+    print ul.quote_plus(p[:-1])
