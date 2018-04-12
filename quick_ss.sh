@@ -8,7 +8,8 @@ install_base()
 init_base()
 {
 	sudo apt-get update
-	mkdir -p /var/setup_ss/
+	sudo mkdir -p /var/setup_ss
+	sudo chmod -R /var/setup_ss
 }
 
 update_kernel()
@@ -91,7 +92,13 @@ remove_yundun()
 	rm /usr/sbin/aliyun-service
 	rm /lib/systemd/system/aliyun.service
 }
-
+install_besttrace()
+{
+	pushd /usr/bin
+	sudo wget http://jp.gzlong7.tk/besttrace 
+	sudo chmod 755 besttrace
+	popd
+}
 
 
 add_usr()
@@ -127,6 +134,7 @@ main()
 
 	update_kernel
 	config_sysctl
+	install_besttrace
 
 	add_usr
 	#config_usr
