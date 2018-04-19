@@ -79,6 +79,7 @@ install_quick-ss()
 }
 config_sysctl()
 {
+	echo "net.ipv6.conf.all.disable_ipv6 = 1" >>/etc/sysctl.conf
 	echo "net.ipv4.tcp_fastopen = 3" >>/etc/sysctl.conf
 	echo "net.ipv4.tcp_congestion_control=bbr" >>/etc/sysctl.conf
 	echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
@@ -130,11 +131,11 @@ main()
 	#install_simple-obfs_frsrc
 	install_simple-obfs
 
-	remove_yundun
-
-	update_kernel
-	config_sysctl
 	install_besttrace
+	config_sysctl
+	update_kernel
+
+	remove_yundun
 
 	add_usr
 	#config_usr
