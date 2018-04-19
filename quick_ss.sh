@@ -9,7 +9,7 @@ init_base()
 {
 	sudo apt-get update
 	sudo mkdir -p /var/setup_ss
-	sudo chmod -R /var/setup_ss
+	sudo chmod -R 777 /var/setup_ss
 }
 
 update_kernel()
