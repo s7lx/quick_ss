@@ -79,8 +79,10 @@ install_quick-ss()
 }
 config_sysctl()
 {
+	pushd /var/setup_ss/quick_ss
 	cat sysctl.txt >> /etc/sysctl.conf
 	sysctl -p
+	popd
 }
 
 remove_yundun()
