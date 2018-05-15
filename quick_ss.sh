@@ -2,7 +2,7 @@
 
 install_base()
 {
-	sudo apt-get install -y language-pack-zh-hans zsh git mosh python --no-install-recommends
+	sudo apt-get install -y vim wget curl language-pack-zh-hans zsh git mosh python --no-install-recommends
 }
 #wget https://raw.githubusercontent.com/s7lx/quick_ss/master/quick_ss.sh && chmod +x quick_ss.sh && ./quick_ss.sh
 init_base()
