@@ -1,0 +1,16 @@
+#!/bin/bash
+if test -z "$1"
+then
+        sslist_path=`pwd`
+else
+        sslist_path=$1
+fi
+for file in `ls $sslist_path/*.json`
+do
+    ct=`cat $file`
+        #       cat $file
+    port=`cat $file|grep "server_port"|grep -Eo "[0-9]+"`
+    password=`cat $file|grep "password"|regex ":\"(.*?)\"",`
+    echo -e $port"\t"$password
+#   ss-server -u -c $file  >/dev/null 2>&1 &
+done
