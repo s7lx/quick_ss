@@ -54,7 +54,7 @@ install_simple-obfs_frsrc()
 install_libcork()
 {
 	pushd /var/setup_ss/
-	fn=`curl http://jp.gzlong7.tk |regex ">(libcork.*?deb)<"`
+	fn=`curl http://jp.gzlong7.tk/list.php |regex ">(libcork.*?deb)<"`
 	wget "http://jp.gzlong7.tk/$fn"
 	sudo dpkg -i libcork*.deb
 	popd
@@ -62,7 +62,7 @@ install_libcork()
 install_simple-obfs()
 {
 	pushd /var/setup_ss/
-	fn=`curl http://jp.gzlong7.tk |egrep -o "simple.*?deb[^<]" |egrep -o "simple.*?deb"`
+	fn=`curl http://jp.gzlong7.tk/list.php |regex ">(simple.*?deb)<" |egrep -o "simple.*?deb"`
 	wget "http://jp.gzlong7.tk/$fn"
 	sudo dpkg -i simple*.deb
 	popd
