@@ -117,6 +117,7 @@ config_usr()
 
 	echo "Richard ALL=(ALL:ALL) ALL" >> /etc/sudoers
 	echo "Richard ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+	sudo chown Richard /home/Richard/.ssh -R
 }
 main()
 {
