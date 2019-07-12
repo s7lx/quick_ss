@@ -1,4 +1,6 @@
 #!/bin/bash
 ps aux |grep $1|grep -v grep |awk '{print $2}'|xargs sudo kill
+port=`cat $1|grep "server_port"|grep -Eo "[0-9]+"
 sfn=${1%.*}".susp"
 mv $1 $sfn
+trafic_log |grep $port
