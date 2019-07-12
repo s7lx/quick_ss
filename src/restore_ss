@@ -1,0 +1,10 @@
+#!/bin/bash
+#ps aux |grep $1|grep -v grep |awk '{print $2}'|sudo kill
+jfn=${1%.*}".json"
+mv $1 $jfn
+port=`cat $jfn|grep "server_port"|grep -Eo "[0-9]+"`
+    if [ "$port" -gt 1024 ]
+    then runss $jfn
+    else sudo runss $jfn
+    fi
+log_port $port

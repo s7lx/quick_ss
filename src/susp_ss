@@ -1,0 +1,4 @@
+#!/bin/bash
+ps aux |grep $1|grep -v grep |awk '{print $2}'|sudo kill
+sfn=${1%.*}".susp"
+mv $1 $sfn
