@@ -2,5 +2,5 @@
 ps aux |grep $1|grep -v grep |awk '{print $2}'|xargs sudo kill
 sfn=${1%.*}".susp"
 mv $1 $sfn
-port=`cat $sfn|grep "server_port"|grep -Eo "[0-9]+"
+port=`cat $sfn|grep "server_port"|grep -Eo "[0-9]+"`
 trafic_log |grep $port
