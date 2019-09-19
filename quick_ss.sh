@@ -40,6 +40,19 @@ install_ss-libev()
 	sudo apt-get install -y shadowsocks-libev
 }
 
+install_ss-libev_bysnap()
+{
+	sudo snap install shadowsocks-libev
+}
+
+config_ssh_longconnect()
+{
+	echo "ClientAliveInterval 120" >> /etc/ssh/sshd_config
+	echo "ClientAliveCountMax 3" >> /etc/ssh/sshd_config
+	sudo service ssh restart
+
+}
+
 install_simple-obfs_frsrc()
 {
 	pushd /var/setup_ss/
@@ -127,12 +140,14 @@ main()
 
 	install_libcork
 	#install_ss-libev_frsrc
-	install_ss-libev
+	#install_ss-libev
+	install_ss-libev_bysnap
 	#install_simple-obfs_frsrc
 	install_simple-obfs
 
 	install_besttrace
 	config_sysctl
+	config_ssh_longconnect
 	update_kernel
 
 	remove_yundun
