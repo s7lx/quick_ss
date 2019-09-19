@@ -138,6 +138,10 @@ main()
 	install_base
 	install_quick-ss
 
+	install_besttrace
+	config_sysctl
+	config_ssh_longconnect
+
 	install_libcork
 	#install_ss-libev_frsrc
 	#install_ss-libev
@@ -145,9 +149,6 @@ main()
 	#install_simple-obfs_frsrc
 	install_simple-obfs
 
-	install_besttrace
-	config_sysctl
-	config_ssh_longconnect
 	update_kernel
 
 	remove_yundun
