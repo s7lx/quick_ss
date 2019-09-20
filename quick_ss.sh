@@ -144,8 +144,8 @@ main()
 
 	install_libcork
 	#install_ss-libev_frsrc
-	#install_ss-libev
-	install_ss-libev_bysnap
+	install_ss-libev
+	#install_ss-libev_bysnap
 	#install_simple-obfs_frsrc
 	install_simple-obfs
 
