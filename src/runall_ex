@@ -7,7 +7,7 @@ else
 	sslist_path=$1
 fi
 dm_prefix=${sslist_path##*/}
-lst_ip=`dig $dm_prefix'.gzlong7.net' +short @8.8.8.8|tail -n 1`
+lst_ip=`dig $dm_prefix'.gzlong7.net' +short |tail -n 1`
 if test -z "$lst_ip"
 then
 	ex_para=""
