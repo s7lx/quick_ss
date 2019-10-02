@@ -13,4 +13,5 @@ sudo ln -f -s $dirl/src/ss_tpl.tpl /etc/ss_tpl.tpl
 sudo ln -f -s $dirl/src/ss_tpl_cpt.tpl /etc/ss_tpl_cpt.tpl
 sudo ln -f -s $dirl/src/restore_ss /usr/bin/restore_ss
 sudo ln -f -s $dirl/src/upgrade_ss /usr/bin/upgrade_ss
+sudo ln -f -s $dirl/src/upgrade_all /usr/bin/upgrade_all
 sudo ln -f -s $dirl/src/susp_ss /usr/bin/susp_ss

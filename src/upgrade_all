@@ -1,0 +1,14 @@
+#!/bin/bash
+#sudo killall ss-server
+if test -z "$1"
+then 
+	sslist_path=`pwd`
+else
+	sslist_path=$1
+fi
+for file in `ls $sslist_path/*.json`
+do
+	#  	cat $file
+	upgrade_ss $file
+#   ss-server -u -c $file  >/dev/null 2>&1 &
+done
