@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#$1 = Local Port
+#$2 = Remote IP Address
+#$3 = Remote Port
+if [ $# != 3 ] ; then
+echo -e "\n USAGE: $0 local_port remote_ip remote_port\n"
+exit 1;
+fi
+
+l_p=$1
+r_ip=$2
+r_p=$3
+
+if [ "$l_p" -gt 1024 ]
+then
+
+socat TCP4-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
+socat UDP4-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
+
+    else
+sudo socat TCP4-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
+sudo socat UDP4-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
+    fi
+log_port $l_p
