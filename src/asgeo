@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ $# != 1 ] ; then
+echo -e "\n USAGE: $0 <ip_address|domain>\n"
+exit 1;
+fi
+q=""
+input=`echo $1|grep '[0-9]\{1,3\}[.][0-9]\{1,3\}[.][0-9]\{1,3\}[.][0-9]\{1,3\}'`
+if [ -z "$input" ]
+#if [ "$?" != "0" ]
+then
+	ip=`dig +short $1|tail -n 1`
+	#ip=`echo $info|tail -n 1`
+	if [ -z "$ip" ]
+	then
+		echo "Input illegal"
+		exit 1;
+	else
+		dig +short $1
+	       	echo  ""
+		echo -e "IP: $ip\n"
+		q=$ip
+	fi
+else
+	q=$input
+fi
+org_str=`wget -U "ipip/tt"  -q -O - http://btapi.ipip.net/host/info?ip=$q&host=`
+#curl -A "ipip/tt" --compressed  -m 1 http://btapi.ipip.net/host/info?ip=$1&host=
+as_a=`echo $org_str |grep -Eo "as\":(.*?)\","`
+as_b=${as_a%\"*}
+as_c=${as_b##*\"}
+echo "$as_c"
+area_a=`echo $org_str |grep -Eo "area\":(.*?)\""`
+area_b=${area_a%\"*}
+area_c=${area_b##*\"}
+echo -e $area_c
