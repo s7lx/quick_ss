@@ -1,0 +1,2 @@
+#!/bin/bash
+netnow |grep obfs|grep ES|grep tcp|grep -v 127.0.0.1|awk '{print $4,$5}'|awk -F":" '{print $2}'|sort|uniq|awk '{print $1}'|uniq -c |grep -v "      1 "
