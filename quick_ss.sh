@@ -34,10 +34,11 @@ install_ss-libev_frsrc()
 
 install_ss-libev()
 {
-	sudo apt-get install software-properties-common -y
-	sudo add-apt-repository ppa:max-c-lv/shadowsocks-libev -y
-	sudo apt-get update
-	sudo apt-get install -y shadowsocks-libev
+	pushd /var/setup_ss/
+	fn=`curl http://jp.gzlong7.tk/list.php |regex ">(shadowsocks-libev.*?deb)<" |egrep -m1 -o "shadowsocks-libev.*?deb"`
+	wget "http://jp.gzlong7.tk/$fn"
+	sudo dpkg -i shadowsocks-libev*.deb
+	popd
 }
 
 install_ss-libev_bysnap()
