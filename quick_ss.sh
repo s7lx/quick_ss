@@ -35,7 +35,7 @@ install_ss-libev_frsrc()
 install_ss-libev()
 {
 	pushd /var/setup_ss/
-	sudo apt-get install -y libbloom1 libcorkipset1 libmbedcrypto3 libsodium23 --no-install-recommends 
+	sudo apt-get install -y libc-ares2 libev4 libbloom1 libcorkipset1 libmbedcrypto3 libsodium23 --no-install-recommends 
 	fn=`curl http://jp.gzlong7.tk/list.php |regex ">(shadowsocks-libev.*?deb)<" |egrep -m1 -o "shadowsocks-libev.*?deb"`
 	wget "http://jp.gzlong7.tk/$fn"
 	sudo dpkg -i shadowsocks-libev*.deb
@@ -77,6 +77,7 @@ install_libcork()
 install_simple-obfs()
 {
 	pushd /var/setup_ss/
+	sudo apt-get install -y pwgen
 	fn=`curl http://jp.gzlong7.tk/list.php |regex ">(simple.*?deb)<" |egrep -o "simple.*?deb"`
 	wget "http://jp.gzlong7.tk/$fn"
 	sudo dpkg -i simple*.deb
