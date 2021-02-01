@@ -116,6 +116,14 @@ install_besttrace()
 	popd
 }
 
+fix_lib()
+{
+	pushd /usr/lib/x86_64-linux-gnu
+	sudo ln -s libsodium.so.23 libsodium.so.18
+	sudo ln -s libmbedcrypto.so.3 libmbedcrypto.so.0
+	popd
+}
+
 
 add_usr()
 {
@@ -158,6 +166,7 @@ main()
 
 	add_usr
 	#config_usr
+	#fix_lib
 }
 
 if [ $# != 0 ]
