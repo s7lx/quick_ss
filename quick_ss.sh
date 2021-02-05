@@ -143,6 +143,15 @@ config_usr()
 	echo "Richard ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 	sudo chown Richard /home/Richard/.ssh -R
 }
+install_rc-local()
+{
+	pushd /var/setup_ss/quick_ss
+	cp rc-local.service /etc/systemd/system/
+	cp rc.local /etc/
+	chmod +x /etc/rc.local
+	systemctl enable rc-local
+	popd
+}
 main()
 {
 	init_base
@@ -159,14 +168,14 @@ main()
 	#install_ss-libev_bysnap
 	#install_simple-obfs_frsrc
 	install_simple-obfs
-
+	#install_rc-local
+	#fix_lib
 	update_kernel
 
 	remove_yundun
 
 	add_usr
 	#config_usr
-	#fix_lib
 }
 
 if [ $# != 0 ]
