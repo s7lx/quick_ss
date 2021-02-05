@@ -146,10 +146,11 @@ config_usr()
 install_rc-local()
 {
 	pushd /var/setup_ss/quick_ss
-	cp rc-local.service /etc/systemd/system/
-	cp rc.local /etc/
-	chmod +x /etc/rc.local
-	systemctl enable rc-local
+	sudo cp rc-local.service /etc/systemd/system/
+	sudo cp rc.local /etc/
+	sudo chmod +x /etc/rc.local
+	sudo systemctl enable rc-local
+	sudo apt-get install net-tools
 	popd
 }
 main()
