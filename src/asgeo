@@ -24,13 +24,7 @@ then
 else
 	q=$input
 fi
-org_str=`wget -U "ipip/tt"  -q -O - http://btapi.ipip.net/host/info?ip=$q&host=`
+org_str=`ipip_read $q|head -n 1`
 #curl -A "ipip/tt" --compressed  -m 1 http://btapi.ipip.net/host/info?ip=$1&host=
-as_a=`echo $org_str |grep -Eo "as\":(.*?)\","`
-as_b=${as_a%\"*}
-as_c=${as_b##*\"}
-echo "$as_c"
-area_a=`echo $org_str |grep -Eo "area\":(.*?)\""`
-area_b=${area_a%\"*}
-area_c=${area_b##*\"}
-echo -e $area_c
+
+echo -e $org_str

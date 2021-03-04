@@ -153,6 +153,13 @@ install_rc-local()
 	sudo apt-get install net-tools
 	popd
 }
+install_ipipdb()
+{
+	pushd /var/setup_ss/quick_ss
+	sudo cp ipip_read /usr/bin/
+	sudo chmod 755 /usr/bin/ipip_read
+	popd
+}
 main()
 {
 	init_base
@@ -160,6 +167,7 @@ main()
 	install_quick-ss
 
 	install_besttrace
+	install_ipipdb
 	config_sysctl
 	config_ssh_longconnect
 
