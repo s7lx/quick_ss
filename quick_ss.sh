@@ -111,9 +111,9 @@ remove_yundun()
 install_besttrace()
 {
 	pushd /usr/bin
-	sudo wget $dm/besttrace 
-	sudo chmod 4755 besttrace
+	sudo wget $dm/besttrace
 	sudo chown root besttrace
+	sudo chmod 4755 besttrace
 	popd
 }
 
