@@ -5,6 +5,6 @@ then
 else
 	para=$2
 fi
-ss-server -u -c $1 --no-delay $para >/dev/null 2>&1 &
-port=`cat $1|grep "server_port"|grep -Eo "[0-9]+"`
+ss-server -c $1 $para >/dev/null 2>&1 &
+#port=`cat $1|grep "server_port"|grep -Eo "[0-9]+"`
 #log_port $port

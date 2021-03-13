@@ -1,5 +1,5 @@
 #!/bin/bash -e 
-
+dm="http://jp2.gzlong7.net"
 install_base()
 {
 	sudo apt-get install -y vim wget curl language-pack-zh-hans vnstat zsh git mosh python --no-install-recommends
@@ -36,8 +36,8 @@ install_ss-libev()
 {
 	pushd /var/setup_ss/
 	sudo apt-get install -y libc-ares2 libev4 libbloom1 libcorkipset1 libmbedcrypto3 libsodium23 --no-install-recommends 
-	fn=`curl http://jp.gzlong7.tk/list.php |regex ">(shadowsocks-libev.*?deb)<" |egrep -m1 -o "shadowsocks-libev.*?deb"`
-	wget "http://jp.gzlong7.tk/$fn"
+	fn=`curl $dm/list.php |regex ">(shadowsocks-libev.*?deb)<" |egrep -m1 -o "shadowsocks-libev.*?deb"`
+	wget "$dm/$fn"
 	sudo dpkg -i shadowsocks-libev*.deb
 	popd
 }
@@ -69,8 +69,8 @@ install_simple-obfs_frsrc()
 install_libcork()
 {
 	pushd /var/setup_ss/
-	fn=`curl http://jp.gzlong7.tk/list.php |regex ">(libcork.*?deb)<"`
-	wget "http://jp.gzlong7.tk/$fn"
+	fn=`curl $dm/list.php |regex ">(libcork.*?deb)<"`
+	wget "$dm/$fn"
 	sudo dpkg -i libcork*.deb
 	popd
 }
@@ -78,8 +78,8 @@ install_simple-obfs()
 {
 	pushd /var/setup_ss/
 	sudo apt-get install -y pwgen
-	fn=`curl http://jp.gzlong7.tk/list.php |regex ">(simple.*?deb)<" |egrep -o "simple.*?deb"`
-	wget "http://jp.gzlong7.tk/$fn"
+	fn=`curl $dm/list.php |regex ">(simple.*?deb)<" |egrep -o "simple.*?deb"`
+	wget "$dm/$fn"
 	sudo dpkg -i simple*.deb
 	popd
 }
@@ -111,8 +111,9 @@ remove_yundun()
 install_besttrace()
 {
 	pushd /usr/bin
-	sudo wget http://jp.gzlong7.tk/besttrace 
-	sudo chmod 755 besttrace
+	sudo wget $dm/besttrace 
+	sudo chmod 4755 besttrace
+	sudo chown root besttrace
 	popd
 }
 
