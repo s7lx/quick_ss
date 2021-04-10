@@ -156,6 +156,7 @@ install_rc-local()
 }
 install_ipipdb()
 {
+	sudo apt-get install libjson-c2 -y
 	pushd /var/setup_ss/quick_ss
 	sudo cp ipip_read /usr/bin/
 	sudo chmod 755 /usr/bin/ipip_read
