@@ -30,7 +30,7 @@ do
 	#echo $ln
 	final_line=$final_line' '$ln"/*.json"
 done
-watch_dir $final_line 
+watch_dir "$final_line" 
 if [ "$?" == "1" ]
 then
 	sudo killall ss-server
