@@ -1,0 +1,38 @@
+#!/bin/bash
+SS_CONFIG_PATH="/etc/ss_config_path"
+watch_dir()
+{
+	set +f
+	file_cnt=0
+	file_cnt=`ls $1|wc -l`
+	echo file_cnt $file_cnt
+	pid_cnt=0
+	pid_cnt=`ps -ef | awk -F " " '{print $8,$2}'|grep ss-server|wc -l`
+	echo pid_cnt $pid_cnt
+	if [ "$file_cnt" = "$pid_cnt" ]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+run_all_path()
+{
+	for ln in `cat $SS_CONFIG_PATH`
+	do
+        	runall $ln
+	done
+}
+final_line=""
+set -f
+for ln in `cat $SS_CONFIG_PATH`
+do
+	#echo $ln
+	final_line=$final_line' '$ln"/*.json"
+done
+watch_dir $final_line 
+if [ "$?" == "1" ]
+then
+	sudo killall ss-server
+	run_all_path
+fi
