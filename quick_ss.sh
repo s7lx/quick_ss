@@ -162,6 +162,14 @@ install_ipipdb()
 	sudo chmod 755 /usr/bin/ipip_read
 	popd
 }
+install_brdgrd()
+{
+	sudo apt-get install libnetfilter-queue1 -y
+	pushd /usr/bin
+	sudo wget $dm/brdgrd -O /usr/bin/brdgrd
+	sudo setcap cap_net_admin=ep /usr/bin/brdgrd
+	popd
+}
 main()
 {
 	init_base

@@ -4,4 +4,5 @@ then
 echo "Have log port:"$1
 else
 sudo iptables -I OUTPUT  -p tcp --sport $1
+sudo iptables -A OUTPUT -p tcp --tcp-flags SYN,ACK SYN,ACK --sport $1 -j NFQUEUE --queue-num 0
 fi
