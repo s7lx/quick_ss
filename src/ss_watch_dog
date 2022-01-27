@@ -39,7 +39,7 @@ fi
 ps -ef | awk -F " " '{print $8,$2}' | grep brdgrd
 if [ "$?" == "0" ]
 then
-echo "nebula is alive"
+echo "brdgrd is alive"
 else
 sudo brdgrd  >/dev/null 2>&1 &
 fi
