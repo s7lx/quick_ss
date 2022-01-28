@@ -168,6 +168,7 @@ install_brdgrd()
 	pushd /usr/bin
 	sudo wget $dm/brdgrd -O /usr/bin/brdgrd
 	sudo setcap cap_net_admin=ep /usr/bin/brdgrd
+	sudo chmod 755 /usr/bin/brdgrd
 	popd
 }
 main()
@@ -176,6 +177,7 @@ main()
 	install_base
 	install_quick-ss
 
+	install_brdgrd
 	install_besttrace
 	install_ipipdb
 	config_sysctl
