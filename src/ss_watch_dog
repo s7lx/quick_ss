@@ -18,14 +18,14 @@ watch_dir()
 }
 run_all_path()
 {
-	for ln in `cat $SS_CONFIG_PATH`
+	for ln in `cat $SS_CONFIG_PATH|grep -Ev "^$|#"`
 	do
         	runall $ln
 	done
 }
 final_line=""
 set -f
-for ln in `cat $SS_CONFIG_PATH`
+for ln in `cat $SS_CONFIG_PATH|grep -Ev "^$|#"`
 do
 	#echo $ln
 	final_line=$final_line' '$ln"/*.json"
