@@ -39,6 +39,8 @@ install_ss-libev()
 	fn=`curl $dm/list.php |regex ">(shadowsocks-libev.*?deb)<" |egrep -m1 -o "shadowsocks-libev.*?deb"`
 	wget "$dm/$fn"
 	sudo dpkg -i shadowsocks-libev*.deb
+	sudo systemctl disable shadowsocks-libev
+	sudo systemctl stop shadowsocks-libev
 	popd
 }
 
@@ -171,6 +173,10 @@ install_brdgrd()
 	sudo chmod 755 /usr/bin/brdgrd
 	popd
 }
+install_sswatchdog()
+{
+	echo "*/5 * * * * /usr/bin/ss_watch_dog" >> /var/spool/cron/crontabs/root
+}
 main()
 {
 	init_base
@@ -189,11 +195,12 @@ main()
 	#install_ss-libev_bysnap
 	#install_simple-obfs_frsrc
 	install_simple-obfs
-	#install_rc-local
-	#fix_lib
-	update_kernel
+	install_rc-local
+	install_sswatchdog
+	fix_lib
+	#update_kernel
 
-	remove_yundun
+	#remove_yundun
 
 	add_usr
 	#config_usr
