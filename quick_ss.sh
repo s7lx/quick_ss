@@ -32,8 +32,18 @@ install_ss-libev_frsrc()
 	popd
 }
 
+install_libcork()
+{
+	pushd /var/setup_ss/
+	fn=`curl $dm/list.php |regex ">(libcork.*?deb)<"`
+	wget "$dm/$fn"
+	sudo dpkg -i libcork*.deb
+	popd
+}
+
 install_ss-libev()
 {
+	install_libcork
 	pushd /var/setup_ss/
 	sudo apt-get install -y libc-ares2 libev4 libbloom1 libcorkipset1 libmbedcrypto3 libsodium23 --no-install-recommends 
 	fn=`curl $dm/list.php |regex ">(shadowsocks-libev.*?deb)<" |egrep -m1 -o "shadowsocks-libev.*?deb"`
@@ -42,6 +52,11 @@ install_ss-libev()
 	sudo systemctl disable shadowsocks-libev
 	sudo systemctl stop shadowsocks-libev
 	popd
+}
+
+install_ssandsimpleobfs()
+{
+	sudo apt-get install shadowsocks-libev simple-obfs -y
 }
 
 install_ss-libev_bysnap()
@@ -68,14 +83,7 @@ install_simple-obfs_frsrc()
 	sudo make install
 	popd
 }
-install_libcork()
-{
-	pushd /var/setup_ss/
-	fn=`curl $dm/list.php |regex ">(libcork.*?deb)<"`
-	wget "$dm/$fn"
-	sudo dpkg -i libcork*.deb
-	popd
-}
+
 install_simple-obfs()
 {
 	pushd /var/setup_ss/
@@ -176,6 +184,8 @@ install_brdgrd()
 install_sswatchdog()
 {
 	echo "*/5 * * * * /usr/bin/ss_watch_dog" >> /var/spool/cron/crontabs/root
+	sudo chmod 0600 /var/spool/cron/crontabs/root
+	sudo service cron restart 
 }
 main()
 {
@@ -183,21 +193,23 @@ main()
 	install_base
 	install_quick-ss
 
+	install_ssandsimpleobfs
 	install_brdgrd
 	install_besttrace
 	install_ipipdb
 	config_sysctl
 	config_ssh_longconnect
 
-	install_libcork
+	#install_libcork
 	#install_ss-libev_frsrc
-	install_ss-libev
+	
+	#install_ss-libev
 	#install_ss-libev_bysnap
 	#install_simple-obfs_frsrc
-	install_simple-obfs
+	#install_simple-obfs
 	install_rc-local
 	install_sswatchdog
-	fix_lib
+	#fix_lib
 	#update_kernel
 
 	#remove_yundun
