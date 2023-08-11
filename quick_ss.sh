@@ -141,6 +141,13 @@ add_usr()
 	sudo adduser Richard --force-badname
 }
 
+install_acl()
+{
+	pushd /var/setup_ss/quick_ss
+	chmod 777 /dev/shm
+	cp mincn.txt /dev/shm
+	popd
+}
 config_usr()
 {
 	wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O /home/Richard/install_omz.sh
@@ -192,7 +199,8 @@ main()
 	init_base
 	install_base
 	install_quick-ss
-
+	
+	install_acl
 	install_ssandsimpleobfs
 	install_brdgrd
 	install_besttrace
