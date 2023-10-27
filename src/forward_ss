@@ -15,11 +15,11 @@ r_p=$3
 if [ "$l_p" -gt 1024 ]
 then
 
-socat TCP4-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
-socat UDP4-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
+socat TCP6-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
+socat UDP6-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
 
     else
-sudo socat TCP4-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
-sudo socat UDP4-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
+sudo socat TCP6-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
+sudo socat UDP6-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
     fi
 log_port $l_p
