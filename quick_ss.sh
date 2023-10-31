@@ -160,6 +160,9 @@ config_usr()
 	echo "Richard ALL=(ALL:ALL) ALL" >> /etc/sudoers
 	echo "Richard ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 	sudo chown Richard /home/Richard/.ssh -R
+
+        sudo mkdir -p /home/Richard/sslist
+	sudo echo "/home/Richard/sslist" > /etc/ss_config_path
 }
 install_rc-local()
 {
@@ -193,6 +196,8 @@ install_sswatchdog()
 	echo "*/5 * * * * /usr/bin/ss_watch_dog" >> /var/spool/cron/crontabs/root
 	sudo chmod 0600 /var/spool/cron/crontabs/root
 	sudo service cron restart 
+ 
+ 	sudo touch /etc/ss_config_path 
 }
 main()
 {
