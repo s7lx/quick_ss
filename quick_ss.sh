@@ -162,6 +162,7 @@ config_usr()
 	sudo chown Richard /home/Richard/.ssh -R
 
         sudo mkdir -p /home/Richard/sslist
+		sudo chown Richard:Richard /home/Richard/sslist
 	sudo echo "/home/Richard/sslist" > /etc/ss_config_path
 }
 install_rc-local()
