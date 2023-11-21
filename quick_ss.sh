@@ -49,14 +49,18 @@ install_ss-libev()
 	fn=`curl $dm/list.php |regex ">(shadowsocks-libev.*?deb)<" |egrep -m1 -o "shadowsocks-libev.*?deb"`
 	wget "$dm/$fn"
 	sudo dpkg -i shadowsocks-libev*.deb
-	sudo systemctl disable shadowsocks-libev
-	sudo systemctl stop shadowsocks-libev
 	popd
 }
 
 install_ssandsimpleobfs()
 {
 	sudo apt-get install shadowsocks-libev simple-obfs -y
+}
+
+disable_sslibev()
+{
+	sudo systemctl disable shadowsocks-libev
+	sudo systemctl stop shadowsocks-libev
 }
 
 install_ss-libev_bysnap()
@@ -208,6 +212,7 @@ main()
 	
 	install_acl
 	install_ssandsimpleobfs
+	disable_sslibev
 	install_brdgrd
 	install_besttrace
 	install_ipipdb
