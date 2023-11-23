@@ -1,5 +1,5 @@
 #!/bin/bash
-if sudo iptables-save |grep -q $1
+if sudo iptables-save |grep sport|grep -q $1
 then
 echo "Have log port:"$1
 else
