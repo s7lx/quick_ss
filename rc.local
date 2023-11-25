@@ -1,4 +1,5 @@
 #!/bin/bash
 cp /var/setup_ss/quick_ss/mincn.txt /dev/shm
+cp /var/setup_ss/quick_ss/cn.txt /dev/shm
 ss_watch_dog
 exit 0

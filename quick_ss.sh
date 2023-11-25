@@ -150,6 +150,7 @@ install_acl()
 	pushd /var/setup_ss/quick_ss
 	chmod 777 /dev/shm
 	cp mincn.txt /dev/shm
+	cp cn.txt /dev/shm
 	popd
 }
 config_usr()
