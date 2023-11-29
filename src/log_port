@@ -1,8 +1,12 @@
 #!/bin/bash
-if sudo iptables-save |grep sport|grep -q $1
+#!/bin/bash
+
+port=$1
+
+if sudo iptables-save | grep -E -- "--sport $port( |$)" >/dev/null
 then
-echo "Have log port:"$1
+    echo "Have log port: $port"
 else
-sudo iptables -I OUTPUT  -p tcp --sport $1
-sudo iptables -A OUTPUT -p tcp --tcp-flags SYN,ACK SYN,ACK --sport $1 -j NFQUEUE --queue-num 0
+    sudo iptables -I OUTPUT -p tcp --sport $port
+    sudo iptables -A OUTPUT -p tcp --tcp-flags SYN,ACK SYN,ACK --sport $port -j NFQUEUE --queue-num 0
 fi
