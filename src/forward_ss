@@ -1,25 +1,38 @@
 #!/bin/bash
 
-#$1 = Local Port
-#$2 = Remote IP Address
-#$3 = Remote Port
-if [ $# != 3 ] ; then
-echo -e "\n USAGE: $0 local_port remote_ip remote_port\n"
-exit 1;
+# $1 = Local Port
+# $2 = Remote IP Address
+# $3 = Remote Port
+# $4 = Protocol (optional)
+
+if [ $# -lt 3 ] ; then
+    echo -e "\n USAGE: $0 local_port remote_ip remote_port [protocol]\n"
+    exit 1;
 fi
 
 l_p=$1
 r_ip=$2
 r_p=$3
+protocol=${4:-TCP_AND_UDP}  # Default to TCP_AND_UDP if the 4th argument is not provided
 
-if [ "$l_p" -gt 1024 ]
-then
-
-socat TCP6-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
-socat UDP6-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
-
+if [ "$l_p" -gt 1024 ]; then
+    if [ "$protocol" = "TCP" ]; then
+        socat TCP6-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
+    elif [ "$protocol" = "UDP" ]; then
+        socat UDP6-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
     else
-sudo socat TCP6-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
-sudo socat UDP6-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
+        socat TCP6-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
+        socat UDP6-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
     fi
+else
+    if [ "$protocol" = "TCP" ]; then
+        sudo socat TCP6-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
+    elif [ "$protocol" = "UDP" ]; then
+        sudo socat UDP6-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
+    else
+        sudo socat TCP6-LISTEN:$l_p,reuseaddr,fork TCP4:$r_ip:$r_p >/dev/null 2>&1 &
+        sudo socat UDP6-LISTEN:$l_p,reuseaddr,fork UDP4:$r_ip:$r_p >/dev/null 2>&1 &
+    fi
+fi
+
 log_port $l_p
