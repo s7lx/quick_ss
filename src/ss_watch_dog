@@ -34,6 +34,7 @@ watch_dir "$final_line"
 if [ "$?" == "1" ]
 then
 	sudo killall ss-server
+	sudo killall obfs-server
 	run_all_path
 fi
 ps -ef | awk -F " " '{print $8,$2}' | grep brdgrd
