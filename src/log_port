@@ -7,6 +7,6 @@ then
     echo "Have log port: $port"
 else
     sudo iptables -I OUTPUT -p tcp --sport $port
-    sudo iptables -I INPUT -p tcp --sport $port
+    sudo iptables -I INPUT -p tcp --dport $port
     sudo iptables -A OUTPUT -p tcp --tcp-flags SYN,ACK SYN,ACK --sport $port -j NFQUEUE --queue-num 0
 fi
