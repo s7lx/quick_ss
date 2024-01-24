@@ -1,4 +1,5 @@
 #!/bin/bash
 sudo killall ss-server
 sudo killall obfs-server
+sleep 3
 ss_watch_dog
