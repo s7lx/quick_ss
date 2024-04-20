@@ -169,6 +169,7 @@ config_usr()
         sudo mkdir -p /home/Richard/sslist
 		sudo chown Richard:Richard /home/Richard/sslist
 	sudo echo "/home/Richard/sslist" > /etc/ss_config_path
+	sudo ln -s /etc/ss_config_path /home/Richard/ss_config_path
 }
 install_rc-local()
 {
