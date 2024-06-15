@@ -20,3 +20,4 @@ sudo ln -f -s $dirl/src/forward_ss /usr/bin/forward_ss
 sudo ln -f -s $dirl/src/susp_ss /usr/bin/susp_ss
 sudo ln -f -s $dirl/src/check_conn /usr/bin/check_conn
 sudo ln -f -s $dirl/src/re_run_all /usr/bin/re_run_all
+sudo ln -f -s $dirl/src/backup_dir.sh /usr/bin/backup_dir.sh
