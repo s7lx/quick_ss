@@ -126,6 +126,7 @@ install_besttrace()
 {
 	pushd /usr/bin
 	sudo wget $dm/besttrace -O /usr/bin/besttrace
+        sudo wget $dm/besttrace.lic -O /usr/bin/besttrace.lic
 	sudo chown root besttrace
 	sudo chmod 4755 besttrace
 	popd
