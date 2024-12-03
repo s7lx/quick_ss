@@ -202,6 +202,7 @@ install_brdgrd()
 install_sswatchdog()
 {
 	echo "*/5 * * * * /usr/bin/ss_watch_dog" >> /var/spool/cron/crontabs/root
+	echo "#0 0 * * * /usr/bin/re_run_all" >> /var/spool/cron/crontabs/root
 	sudo chmod 0600 /var/spool/cron/crontabs/root
 	sudo service cron restart 
  
