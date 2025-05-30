@@ -25,6 +25,7 @@ else
 	q=$input
 fi
 org_str=`ipip_read $q|head -n 1`
+asb=`curl  -s http://check.my/$q  |sed -E 's/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}//g'`
 #curl -A "ipip/tt" --compressed  -m 1 http://btapi.ipip.net/host/info?ip=$1&host=
 
-echo -e $org_str
+echo -e $org_str$asb
