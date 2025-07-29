@@ -208,6 +208,22 @@ install_sswatchdog()
  
  	sudo touch /etc/ss_config_path 
 }
+improve_mem()
+{
+	sudo apt remove lxcfs -y
+	sudo apt remove multipath-tools -y
+	sudo apt remove snapd -y
+	sudo apt purge snapd -y
+	sudo apt purge lxd-agent-loader -y
+	sudo systemctl disable --now ModemManager
+	sudo systemctl disable --now udisks2
+	sudo systemctl disable --now fwupd.service
+    sudo systemctl disable --now upower.service
+	sudo systemctl disable --now polkit
+	sudo systemctl disable --now accounts-daemon
+	sudo systemctl mask polkit
+	sudo apt autoremove -y
+}
 main()
 {
 	init_base
