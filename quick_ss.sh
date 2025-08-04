@@ -215,13 +215,30 @@ improve_mem()
 	sudo apt remove snapd -y
 	sudo apt purge snapd -y
 	sudo apt purge lxd-agent-loader -y
-	sudo systemctl disable --now ModemManager
-	sudo systemctl disable --now udisks2
-	sudo systemctl disable --now fwupd.service
-    sudo systemctl disable --now upower.service
-	sudo systemctl disable --now polkit
-	sudo systemctl disable --now accounts-daemon
+	
+	sudo systemctl stop ModemManager
+	sudo systemctl disable ModemManager
+	
+	sudo systemctl stop udisks2
+	sudo systemctl disable udisks2
+	
+	sudo systemctl stop fwupd.service
+	sudo systemctl disable fwupd.service
+	
+	sudo systemctl stop upower.service
+    sudo systemctl disable upower.service
+	
+	sudo systemctl stop polkit
+	sudo systemctl disable polkit
+	
+	sudo systemctl stop accounts-daemon
+	sudo systemctl disable accounts-daemon
+	
 	sudo systemctl mask polkit
+	
+	sudo systemctl stop packagekit
+	sudo systemctl disable packagekit
+	
 	sudo apt autoremove -y
 }
 main()
