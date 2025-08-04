@@ -226,19 +226,18 @@ improve_mem()
 	sudo systemctl disable fwupd.service
 	
 	sudo systemctl stop upower.service
-    sudo systemctl disable upower.service
+	sudo systemctl disable upower.service
 	
 	sudo systemctl stop polkit
 	sudo systemctl disable polkit
-	
-	sudo systemctl stop accounts-daemon
-	sudo systemctl disable accounts-daemon
-	
 	sudo systemctl mask polkit
 	
 	sudo systemctl stop packagekit
 	sudo systemctl disable packagekit
 	
+	sudo systemctl stop accounts-daemon
+	sudo systemctl disable accounts-daemon
+
 	sudo apt autoremove -y
 }
 main()
