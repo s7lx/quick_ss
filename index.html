@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick SS Installation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .command-box {
+            background-color: #f6f8fa;
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 14px;
+            color: #24292f;
+            word-break: break-all;
+            position: relative;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #0969da;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.2s;
+        }
+        
+        .copy-button:hover {
+            background: #0860ca;
+        }
+        
+        .copy-button:active {
+            background: #0550ae;
+        }
+        
+        .instructions {
+            color: #656d76;
+            font-size: 14px;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+        
+        .success-message {
+            display: none;
+            color: #1a7f37;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quick SS 安装命令</h1>
+        
+        <div class="command-box" id="commandBox">
+            <button class="copy-button" onclick="copyCommand()">复制</button>
+            <code id="command">wget https://raw.githubusercontent.com/s7lx/quick_ss/master/quick_ss.sh && chmod +x quick_ss.sh && ./quick_ss.sh</code>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            ✅ 命令已复制到剪贴板
+        </div>
+        
+        <div class="instructions">
+            <p>在你的服务器终端中粘贴并执行上述命令即可安装和运行 Quick SS。</p>
+        </div>
+    </div>
+
+    <script>
+        function copyCommand() {
+            const command = document.getElementById('command').textContent;
+            
+            // 使用现代的 Clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(command).then(function() {
+                    showSuccessMessage();
+                }).catch(function(err) {
+                    // 如果 Clipboard API 失败，使用传统方法
+                    fallbackCopy(command);
+                });
+            } else {
+                // 浏览器不支持 Clipboard API，使用传统方法
+                fallbackCopy(command);
+            }
+        }
+        
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-9999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showSuccessMessage();
+            } catch (err) {
+                alert('复制失败，请手动复制命令');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
+        function showSuccessMessage() {
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            
+            // 3秒后隐藏成功消息
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+        }
+        
+        // 点击命令框也可以复制
+        document.getElementById('commandBox').addEventListener('click', function(e) {
+            if (e.target.tagName !== 'BUTTON') {
+                copyCommand();
+            }
+        });
+    </script>
+</body>
+</html>
