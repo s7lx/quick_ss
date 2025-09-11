@@ -182,9 +182,29 @@ install_rc-local()
 	sudo apt-get install net-tools
 	popd
 }
+get_ubuntu_version()
+{
+	if [ -f /etc/os-release ]; then
+		. /etc/os-release
+		echo $VERSION_ID | cut -d. -f1
+	else
+		echo "20"
+	fi
+}
+
 install_ipipdb()
 {
-	sudo apt-get install libjson-c4 -y
+	UBUNTU_VERSION=$(get_ubuntu_version)
+	if [ "$UBUNTU_VERSION" = "20" ]; then
+		sudo apt-get install libjson-c4 -y
+	elif [ "$UBUNTU_VERSION" = "22" ]; then
+		sudo apt-get install libjson-c5 -y
+		if [ ! -f "/usr/lib/x86_64-linux-gnu/libjson-c.so.4" ]; then
+			sudo ln -sf /usr/lib/x86_64-linux-gnu/libjson-c.so.5 /usr/lib/x86_64-linux-gnu/libjson-c.so.4
+		fi
+	else
+		sudo apt-get install libjson-c4 -y
+	fi
 	pushd /var/setup_ss/quick_ss
 	sudo cp ipip_read /usr/bin/
 	sudo chmod 755 /usr/bin/ipip_read
