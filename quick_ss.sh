@@ -2,7 +2,7 @@
 dm="http://jp2.gzlong7.net"
 install_base()
 {
-	sudo apt-get install -y vim wget curl language-pack-zh-hans vnstat zsh git mosh python2 socat mtr-tiny psmisc cron --no-install-recommends
+	sudo apt-get install -y vim wget curl language-pack-zh-hans language-pack-en-base vnstat zsh git mosh python2 socat mtr-tiny psmisc cron --no-install-recommends
 }
 #wget https://raw.githubusercontent.com/s7lx/quick_ss/master/quick_ss.sh && chmod +x quick_ss.sh && ./quick_ss.sh
 init_base()
