@@ -1,33 +1,54 @@
-#!/usr/bin/python2
-#coding: utf8
+#!/usr/bin/env python3
+# coding: utf8
+'''Extract regex matches from a file or stdin (one match per line).
+
+Usage:
+    regex PATTERN [FILE]
+    ... | regex PATTERN
+
+Python 3 port of the original Python 2 tool: same CLI, same output.
+stdin/files are read as bytes and decoded with surrogateescape so that
+non-UTF-8 content still round-trips byte-for-byte (Python 2 read raw bytes).
+'''
 import re
 import sys
 
+
 def read_file(fn):
-    '''read file '''
-    fp = open(fn,"r")
-    h = fp.read()
-    fp.close
-    return h
+    '''read file, byte-for-byte safe'''
+    with open(fn, 'rb') as fp:
+        data = fp.read()
+    return data.decode('utf-8', 'surrogateescape')
 
-def controller(reg_str,ctstr):
-    ''' regx fomula
-        content string
-         '''
-    ct = re.compile(reg_str,re.DOTALL).findall(ctstr)
-    for x in ct :
-        print x;
 
-    return
+def controller(reg_str, ctstr):
+    '''regex formula + content string'''
+    for x in re.compile(reg_str, re.DOTALL).findall(ctstr):
+        print(x)
 
-if len(sys.argv) < 2 :
-    exit()
-if len(sys.argv) == 3 :
-    f=read_file(sys.argv[2])
-else :
+
+def main(argv):
+    if len(argv) < 2:
+        return 0
+    if len(argv) == 3:
+        content = read_file(argv[2])
+    else:
+        try:
+            content = sys.stdin.buffer.read().decode('utf-8', 'surrogateescape')
+        except KeyboardInterrupt:
+            return 1
+    if len(content) != 0:
+        controller(argv[1], content)
+    return 0
+
+
+if __name__ == '__main__':
+    # Preserve raw bytes on stdout for undecodable input (py2 behaviour).
     try:
-        f =sys.stdin.read()
-    except KeyboardInterrupt:
-        exit(1)
-if len(f) !=0:
-    controller(sys.argv[1],f)
+        sys.stdout.reconfigure(errors='surrogateescape')
+    except AttributeError:
+        pass
+    try:
+        sys.exit(main(sys.argv))
+    except BrokenPipeError:
+        sys.exit(0)
