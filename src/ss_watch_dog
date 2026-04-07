@@ -27,7 +27,7 @@ final_line=""
 set -f
 for ln in `cat $SS_CONFIG_PATH|grep -Ev "^$|#"`
 do
-	#echo $ln
+	echo $ln
 	final_line=$final_line' '$ln"/*.json"
 done
 watch_dir "$final_line" 
